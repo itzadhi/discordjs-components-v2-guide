@@ -74,8 +74,6 @@ TypeScript examples are checked with `tsc -p examples/discordjs-bot/tsconfig.jso
 The provided logo is used in the README banner, documentation navbar, homepage splash, footer, favicon metadata, social preview card, GitHub profile card asset, and generated preview artwork.
 
 <p align="center">
-  <img src="./public/brand/itzadhi-logo.jpeg" alt="itzadhi logo" width="96" />
-  <br />
   <img src="./assets/itzadhi-profile-card.svg" alt="itzadhi GitHub profile card" width="420" />
 </p>
 
