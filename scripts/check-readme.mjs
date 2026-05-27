@@ -11,12 +11,15 @@ if (!html.includes("Made by") || !html.includes("@itzadhi")) {
   throw new Error("README rendered output is missing required credits.");
 }
 
-const imageMatches = [...readme.matchAll(/!\[[^\]]*\]\((\.\/[^)]+)\)/g)];
-for (const match of imageMatches) {
-  const target = path.join(process.cwd(), match[1].replace(/^\.\//, ""));
+const markdownImages = [...readme.matchAll(/!\[[^\]]*\]\((\.\/[^)]+)\)/g)].map((match) => match[1]);
+const htmlImages = [...readme.matchAll(/<img[^>]+src=["'](\.\/[^"']+)["']/g)].map((match) => match[1]);
+const localImages = [...new Set([...markdownImages, ...htmlImages])];
+
+for (const image of localImages) {
+  const target = path.join(process.cwd(), image.replace(/^\.\//, ""));
   if (!fs.existsSync(target)) {
-    throw new Error(`README image target does not exist: ${match[1]}`);
+    throw new Error(`README image target does not exist: ${image}`);
   }
 }
 
-console.log(`README rendered to ${html.length} characters with ${imageMatches.length} local image assets.`);
+console.log(`README rendered to ${html.length} characters with ${localImages.length} local image assets.`);

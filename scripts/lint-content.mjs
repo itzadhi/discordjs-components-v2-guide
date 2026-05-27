@@ -32,9 +32,11 @@ for (const file of files) {
 
 for (const asset of [
   "public/brand/itzadhi-logo.jpeg",
-  "assets/readme-banner.svg",
+  "assets/itzadhi-readme-banner.svg",
+  "assets/itzadhi-home-preview.svg",
+  "assets/itzadhi-docs-preview.svg",
   "public/og/social-card.svg",
-  "assets/github-profile-card.svg"
+  "assets/itzadhi-profile-card.svg"
 ]) {
   if (!fs.existsSync(path.join(process.cwd(), asset))) {
     throw new Error(`Missing required branding asset: ${asset}`);
