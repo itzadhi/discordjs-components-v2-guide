@@ -1,0 +1,158 @@
+---
+title: "Setup: Node.js, Editors, Package Managers, Applications, Intents, Permissions, and Tokens"
+description: "Set up a modern v14 bot project without leaking tokens or enabling privileged intents without a reason."
+section: "Foundation"
+order: 2
+tags: ["discord.js v14+", "Foundation", "TypeScript", "modern-discord-api"]
+---
+
+<Callout title="Credits and source posture">
+  This lesson is part of Discord.js Components V2 Guide, created for Adhi (@itzaqdhi). It teaches modern Discord API
+  practices only and treats outdated snippets as migration examples, not as recommended code.
+</Callout>
+
+## 1. What Is It?
+
+Setup is the point where your local code becomes a Discord application with a bot user, application commands, and a permission model.
+
+In human terms: a Discord bot is a small service waiting for Discord to say, "someone did something." Your job is to understand that signal, make a safe decision, and send back a response that feels instant and clear.
+
+## 2. Why Does It Exist?
+
+Production teams make setup repeatable so new contributors can run examples without touching real production secrets.
+
+This exists because real communities need predictable interfaces. Buttons, menus, modals, slash commands, events, databases, and services each remove a different kind of confusion from the user and the developer.
+
+## 3. How Discord Handles It Internally
+
+Discord stores the application, bot user, OAuth2 scopes, permissions integer, and privileged intent switches separately from your source code.
+
+The important production rule is timing: acknowledge interactions quickly, defer when work may take longer, and keep secrets, permissions, and persistent state outside the visible component payload.
+
+## 4. Visual Explanation
+
+<MermaidDiagram
+  title="Setup: Node.js, Editors, Package Managers, Applications, Intents, Permissions, and Tokens flow"
+  chart={
+    'flowchart LR\n    A["Developer Portal"] --> B["Environment"]\n    B --> C["Bot Login"]\n    C --> D["Modern response"]\n    D --> E["Logs, metrics, and next action"]'
+  }
+/>
+
+<ReferenceTable data='{"headers":["Layer","What happens","Production question"],"rows":[["Discord layer","Receives Developer Portal and creates a typed interaction or event payload.","Which intent, permission, or response deadline applies?"],["Bot layer","Routes the payload through Environment and validates the user action.","Can another user click or replay this path?"],["Service layer","Executes Bot Login with logging, storage, and clear error handling.","What happens during restart, rate limit, or database failure?"]]}' />
+
+## 5. Beginner Example
+
+This beginner example intentionally keeps the moving parts visible.
+
+```ts
+import { SlashCommandBuilder } from "discord.js";
+
+export const data = new SlashCommandBuilder().setName("learn").setDescription("Open a modern Discord learning panel");
+
+export async function execute(interaction: ChatInputCommandInteraction) {
+  await interaction.reply({
+    content: "Start with the idea, then the Discord API behavior, then the code.",
+    ephemeral: true
+  });
+}
+```
+
+Line-by-line mindset: identify the user action, create the smallest valid response, and keep state either in Discord's interaction payload or in a service you control.
+
+## 6. Intermediate Example
+
+The intermediate version separates routing from the feature logic.
+
+```ts
+type RouteContext = {
+  userId: string;
+  guildId: string;
+  customId: string;
+};
+
+export function parseRoute(customId: string) {
+  const [namespace, action, state = "default"] = customId.split(":");
+  return { namespace, action, state };
+}
+
+export async function routeInteraction(ctx: RouteContext) {
+  const route = parseRoute(ctx.customId);
+  if (route.namespace !== "academy") {
+    return { ok: false, reason: "Unknown component namespace" };
+  }
+
+  return { ok: true, action: route.action, state: route.state };
+}
+```
+
+This is the point where beginners become maintainers: the code is still small, but each file has a reason to exist.
+
+## 7. Production Example
+
+Production code adds validation, persistence, logging, and recovery boundaries.
+
+```ts
+import { PermissionFlagsBits, type ButtonInteraction } from "discord.js";
+
+export async function handleProductionAction(interaction: ButtonInteraction) {
+  const startedAt = Date.now();
+
+  if (!interaction.inCachedGuild()) {
+    return interaction.reply({ content: "Use this inside a server.", ephemeral: true });
+  }
+
+  if (!interaction.memberPermissions.has(PermissionFlagsBits.ManageGuild)) {
+    return interaction.reply({ content: "You do not have permission for this action.", ephemeral: true });
+  }
+
+  await interaction.deferReply({ ephemeral: true });
+  await auditLog.write({
+    guildId: interaction.guildId,
+    userId: interaction.user.id,
+    customId: interaction.customId,
+    latencyMs: Date.now() - startedAt
+  });
+
+  await interaction.editReply("Action completed and recorded safely.");
+}
+```
+
+Large bots use this shape because one slow database call, one missing permission check, or one reused custom ID can break thousands of interactions.
+
+## 8. Common Mistakes
+
+<OutdatedWarning
+  oldWay="Using legacy v12/v13 component classes, prefix-first command handlers, or embed-only interfaces as the default architecture."
+  why="Those approaches either predate modern interactions or hide important Discord API behavior that matters for permissions, timing, routing, and scale."
+  modern="Use discord.js v14 builders, application commands, interactionCreate routing, Components V2 where appropriate, typed services, and environment-based configuration."
+/>
+
+- Forgetting that component custom IDs are user-controlled routing inputs.
+- Treating ephemeral responses as private storage instead of temporary user-facing messages.
+- Doing slow database or API work before acknowledging an interaction.
+- Copying old snippets without checking library version and Discord API behavior.
+
+## 9. Best Practices
+
+- Name custom IDs with a namespace, action, and short state key.
+- Keep handlers thin; put business decisions in services.
+- Register commands and persistent UI intentionally during startup or deployment.
+- Prefer explicit permission checks over assumptions based on channel visibility.
+- Keep examples readable, then show the production boundary separately.
+
+## 10. Performance Notes
+
+Cache data that is safe to cache, but never confuse cache with source of truth. Use deferred responses for slow work, batch database reads when possible, and avoid running heavy computation inside the interaction callback itself.
+
+## 11. Security Notes
+
+Never store tokens in Git. Validate user, guild, channel, role, and message state before taking action. For component systems, assume a user can click an old message after a deploy and design the handler to re-check current permissions.
+
+## 12. Challenge Section
+
+1. Draw the lifecycle for this topic from user action to final response.
+2. Add one permission guard and one logging statement to the beginner example.
+3. Convert the intermediate example into a service with tests or validation.
+4. Explain what would break if this feature were used by 10,000 guilds.
+
+<ComparisonTabs data='[{"label":"Beginner","value":"beginner","body":"Focus on the user story: what the person clicks, selects, submits, or expects from Setup: Node.js, Editors, Package Managers, Applications, Intents, Permissions, and Tokens."},{"label":"Intermediate","value":"intermediate","body":"Move repeated behavior into typed handlers, services, validation helpers, and small modules."},{"label":"Production","value":"production","body":"Add persistence, permission guards, observability, rate-limit awareness, and deployment-safe boundaries."}]' />

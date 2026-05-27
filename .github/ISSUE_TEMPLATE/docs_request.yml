@@ -1,0 +1,12 @@
+name: Documentation request
+description: Request a new lesson, reference, diagram, or example.
+title: "[Docs]: "
+labels: ["documentation"]
+body:
+  - type: textarea
+    id: topic
+    attributes:
+      label: Topic
+      description: What should be added or improved?
+    validations:
+      required: true

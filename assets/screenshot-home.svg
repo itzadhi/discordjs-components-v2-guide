@@ -1,0 +1,24 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="900" fill="#030305"/>
+  <circle cx="1120" cy="140" r="260" fill="#7f1d1d" opacity=".22"/>
+  <circle cx="280" cy="760" r="310" fill="#450a0a" opacity=".28"/>
+  <rect x="80" y="64" width="1280" height="772" rx="28" fill="rgba(255,255,255,.045)" stroke="rgba(254,202,202,.2)"/>
+  <circle cx="124" cy="106" r="8" fill="#ef4444"/>
+  <circle cx="150" cy="106" r="8" fill="#f59e0b"/>
+  <circle cx="176" cy="106" r="8" fill="#22c55e"/>
+  <text x="220" y="116" font-family="Inter, Segoe UI, Arial" font-size="22" font-weight="700" fill="#fecaca">Discord.js Components V2 Guide</text>
+  <rect x="112" y="162" width="252" height="628" rx="20" fill="rgba(2,6,23,.72)" stroke="rgba(248,113,113,.18)"/>
+  <rect x="396" y="162" width="656" height="628" rx="20" fill="rgba(15,23,42,.62)" stroke="rgba(248,113,113,.18)"/>
+  <rect x="1084" y="162" width="244" height="628" rx="20" fill="rgba(2,6,23,.72)" stroke="rgba(248,113,113,.18)"/>
+  <text x="432" y="232" font-family="Inter, Segoe UI, Arial" font-size="42" font-weight="850" fill="#fff7f7">Animated Academy Home</text>
+  <text x="432" y="282" font-family="Inter, Segoe UI, Arial" font-size="23" font-weight="520" fill="#fecaca">Human language first, then visuals, then modern production code.</text>
+  <rect x="138" y="202" width="170" height="16" rx="8" fill="#334155" opacity=".72"/><rect x="138" y="256" width="188" height="16" rx="8" fill="#334155" opacity=".72"/><rect x="138" y="310" width="206" height="16" rx="8" fill="#334155" opacity=".72"/><rect x="138" y="364" width="170" height="16" rx="8" fill="#ef4444" opacity=".9"/><rect x="138" y="418" width="188" height="16" rx="8" fill="#334155" opacity=".72"/><rect x="138" y="472" width="206" height="16" rx="8" fill="#334155" opacity=".72"/><rect x="138" y="526" width="170" height="16" rx="8" fill="#334155" opacity=".72"/><rect x="138" y="580" width="188" height="16" rx="8" fill="#334155" opacity=".72"/><rect x="138" y="634" width="206" height="16" rx="8" fill="#334155" opacity=".72"/>
+  <rect x="432" y="338" width="556" height="214" rx="18" fill="#050509" stroke="#7f1d1d"/>
+  <text x="462" y="392" font-family="Consolas, Monaco, monospace" font-size="20" fill="#fecaca">interactionCreate → guard → router → service → reply</text>
+  <rect x="462" y="430" width="132" height="42" rx="12" fill="#991b1b"/>
+  <rect x="616" y="430" width="132" height="42" rx="12" fill="#1f2937"/>
+  <rect x="770" y="430" width="132" height="42" rx="12" fill="#1f2937"/>
+  <text x="1098" y="214" font-family="Inter, Segoe UI, Arial" font-size="20" font-weight="800" fill="#fecaca">On this page</text>
+  <rect x="1098" y="246" width="118" height="12" rx="6" fill="#64748b" opacity=".72"/><rect x="1098" y="288" width="150" height="12" rx="6" fill="#64748b" opacity=".72"/><rect x="1098" y="330" width="118" height="12" rx="6" fill="#64748b" opacity=".72"/><rect x="1098" y="372" width="150" height="12" rx="6" fill="#64748b" opacity=".72"/><rect x="1098" y="414" width="118" height="12" rx="6" fill="#64748b" opacity=".72"/><rect x="1098" y="456" width="150" height="12" rx="6" fill="#64748b" opacity=".72"/><rect x="1098" y="498" width="118" height="12" rx="6" fill="#64748b" opacity=".72"/><rect x="1098" y="540" width="150" height="12" rx="6" fill="#64748b" opacity=".72"/>
+  <text x="432" y="644" font-family="Inter, Segoe UI, Arial" font-size="26" font-weight="800" fill="#fee2e2">Created by Adhi / @itzaqdhi</text>
+</svg>
