@@ -15,7 +15,7 @@ export default function AboutPage() {
         <div className="grid gap-8 md:grid-cols-[280px_1fr]">
           <img
             src={assetPath(site.logo)}
-            alt="Adhi logo"
+            alt="itzadhi logo"
             className="aspect-square rounded-3xl border border-red-300/20 object-cover shadow-2xl shadow-red-950/60"
           />
           <div className="space-y-6">
@@ -29,9 +29,7 @@ export default function AboutPage() {
                   <CardTitle>Credit</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-slate-300">
-                    Created and branded for {site.credit.displayName} / @{site.credit.username}.
-                  </p>
+                  <p className="text-sm text-slate-300">Made by @{site.credit.username}.</p>
                 </CardContent>
               </Card>
               <Card>

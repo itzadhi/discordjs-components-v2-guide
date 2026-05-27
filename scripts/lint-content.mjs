@@ -31,7 +31,7 @@ for (const file of files) {
 }
 
 for (const asset of [
-  "public/brand/adhi-logo.jpeg",
+  "public/brand/itzadhi-logo.jpeg",
   "assets/readme-banner.svg",
   "public/og/social-card.svg",
   "assets/github-profile-card.svg"
@@ -42,7 +42,7 @@ for (const asset of [
 }
 
 const readme = fs.readFileSync("README.md", "utf8");
-for (const credit of ["Adhi", "@itzaqdhi", "Created by"]) {
+for (const credit of ["itzadhi", "@itzadhi", "Made by"]) {
   if (!readme.includes(credit)) {
     throw new Error(`README missing required credit text: ${credit}`);
   }

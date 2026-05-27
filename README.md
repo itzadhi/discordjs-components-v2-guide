@@ -5,13 +5,13 @@
 [![CI](https://github.com/itzadhi/discordjs-components-v2-guide/actions/workflows/ci.yml/badge.svg)](https://github.com/itzadhi/discordjs-components-v2-guide/actions/workflows/ci.yml)
 [![Pages](https://github.com/itzadhi/discordjs-components-v2-guide/actions/workflows/pages.yml/badge.svg)](https://github.com/itzadhi/discordjs-components-v2-guide/actions/workflows/pages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](./LICENSE)
-[![Created by Adhi](https://img.shields.io/badge/Created%20by-Adhi%20%2F%20%40itzaqdhi-black?labelColor=7f1d1d)](https://github.com/itzadhi)
+[![Made by @itzadhi](https://img.shields.io/badge/Made%20by-%40itzadhi-black?labelColor=7f1d1d)](https://github.com/itzadhi)
 
 **A premium Discord.js v14+ academy, reference, and production handbook for modern components.**
 
 This repository is built to feel like an official framework documentation site, a premium paid course, a production engineering handbook, an advanced developer wiki, and a beginner academy at the same time.
 
-Created by **Adhi**. Required credit username: **@itzaqdhi**.
+Made by **@itzadhi**.
 
 ## Preview
 
@@ -48,7 +48,7 @@ Production documentation is configured for GitHub Pages: [https://itzadhi.github
 - Components V2, buttons, select menus, modals, persistent UI, and routing
 - Events, databases, production systems, security, hosting, and scaling
 - Full real projects with source modules and architecture notes
-- FAQ, troubleshooting, glossary, comparison pages, and quick references
+- FAQ, troubleshooting, glossary, comparison pages, quick references, and function-by-function API explanations
 
 ## Example Verification
 
@@ -58,7 +58,7 @@ TypeScript examples are checked with `tsc -p examples/discordjs-bot/tsconfig.jso
 
 The provided logo is used in the README banner, documentation navbar, homepage splash, footer, favicon metadata, social preview card, GitHub profile card asset, and generated preview artwork.
 
-![Adhi logo](./public/brand/adhi-logo.jpeg)
+![itzadhi logo](./public/brand/itzadhi-logo.jpeg)
 
 ![GitHub profile card](./assets/github-profile-card.svg)
 

@@ -8,14 +8,14 @@ export const site = {
   primary: "discord.js v14+",
   language: "TypeScript",
   credit: {
-    username: "itzaqdhi",
-    displayName: "Adhi",
+    username: "itzadhi",
+    displayName: "itzadhi",
     githubUrl: "https://github.com/itzadhi"
   },
   url: "https://itzadhi.github.io/discordjs-components-v2-guide/",
   repoUrl: "https://github.com/itzadhi/discordjs-components-v2-guide",
   docsUrl: "https://itzadhi.github.io/discordjs-components-v2-guide/docs",
-  logo: "/brand/adhi-logo.jpeg",
+  logo: "/brand/itzadhi-logo.jpeg",
   ogImage: "/og/social-card.svg",
   references: [
     { label: "Discord Components Overview", href: "https://docs.discord.com/developers/components/overview" },

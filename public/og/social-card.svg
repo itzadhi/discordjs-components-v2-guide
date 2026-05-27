@@ -13,6 +13,6 @@
   <circle cx="190" cy="222" r="122" stroke="#ef4444" stroke-width="6"/>
   <text x="360" y="198" font-family="Inter, Segoe UI, Arial" font-size="58" font-weight="850" fill="#fff7f7">Discord.js Components V2 Guide</text>
   <text x="364" y="270" font-family="Inter, Segoe UI, Arial" font-size="30" font-weight="550" fill="#fecaca">A premium Discord.js v14+ academy, reference, and production handbook for modern components.</text>
-  <text x="364" y="352" font-family="Consolas, Monaco, monospace" font-size="24" font-weight="700" fill="#fca5a5">Adhi / @itzaqdhi • discord.js v14+ • Modern Discord API only</text>
+  <text x="364" y="352" font-family="Consolas, Monaco, monospace" font-size="24" font-weight="700" fill="#fca5a5">@itzadhi • discord.js v14+ • Modern Discord API only</text>
   <text x="76" y="514" font-family="Inter, Segoe UI, Arial" font-size="28" font-weight="700" fill="#fee2e2">Beginner academy • Developer reference • Production handbook • Interactive ecosystem</text>
 </svg>

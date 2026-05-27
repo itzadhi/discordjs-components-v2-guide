@@ -17,9 +17,9 @@ export const metadata: Metadata = {
   },
   description: site.description,
   applicationName: site.name,
-  authors: [{ name: "Adhi", url: site.credit.githubUrl }],
-  creator: "Adhi (@itzaqdhi)",
-  publisher: "Adhi (@itzaqdhi)",
+  authors: [{ name: "itzadhi", url: site.credit.githubUrl }],
+  creator: "@itzadhi",
+  publisher: "@itzadhi",
   keywords: ["Discord", "discord.js v14+", "Components V2", "Next.js", "TypeScript", "MDX"],
   icons: {
     icon: [{ url: assetPath(site.logo), type: "image/jpeg" }],
@@ -31,14 +31,14 @@ export const metadata: Metadata = {
     title: site.name,
     description: site.description,
     siteName: site.name,
-    images: [{ url: assetPath(site.ogImage), width: 1280, height: 640, alt: site.name + " social preview by Adhi" }]
+    images: [{ url: assetPath(site.ogImage), width: 1280, height: 640, alt: site.name + " social preview by itzadhi" }]
   },
   twitter: {
     card: "summary_large_image",
     title: site.name,
     description: site.description,
     images: [assetPath(site.ogImage)],
-    creator: "@itzaqdhi"
+    creator: "@itzadhi"
   }
 };
 

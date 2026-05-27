@@ -7,8 +7,8 @@ tags: ["discord.js v14+", "Architecture", "TypeScript", "modern-discord-api"]
 ---
 
 <Callout title="Credits and source posture">
-  This lesson is part of Discord.js Components V2 Guide, created for Adhi (@itzaqdhi). It teaches modern Discord API
-  practices only and treats outdated snippets as migration examples, not as recommended code.
+  This lesson is part of Discord.js Components V2 Guide, made by @itzadhi. It teaches modern Discord API practices only
+  and treats outdated snippets as migration examples, not as recommended code.
 </Callout>
 
 ## 1. What Is It?
@@ -118,6 +118,16 @@ export async function handleProductionAction(interaction: ButtonInteraction) {
 ```
 
 Large bots use this shape because one slow database call, one missing permission check, or one reused custom ID can break thousands of interactions.
+
+### Function-by-function walkthrough
+
+This table explains the functions, classes, methods, and helpers that appear throughout the examples. Read it like a map: the name tells you what you call, the middle column explains what it does, and the last column explains how production bots should think about it.
+
+<ReferenceTable
+  data={
+    '{"headers":["Function or API","What it does","How to use it safely"],"rows":[["SlashCommandBuilder","Creates the slash command schema that Discord stores and shows in the client.","Use it during command registration, not inside every click handler."],["setName and setDescription","Define the command identity and human-facing help text.","Names become part of the Discord API contract, so keep them stable after release."],["ActionRowBuilder","Groups interactive components into a row that Discord can render.","Keep each row focused so users can scan choices quickly."],["ButtonBuilder and ButtonStyle","Create clickable buttons and choose the visual intent: primary, secondary, success, danger, or link.","The color should match meaning, not decoration."],["StringSelectMenuBuilder","Creates a dropdown where users choose one or more values.","Use selects when the user chooses from many related options."],["ModalBuilder and TextInputBuilder","Open a Discord-native form and collect structured text input.","Validate every submitted field before writing to storage."],["interaction.reply","Sends the first response to an interaction.","Use it for fast work that can finish inside Discord interaction timing."],["interaction.deferReply","Acknowledges the interaction while the bot does slower work.","Use it before database calls, API calls, or anything that may be slow."],["interaction.editReply","Replaces the deferred response with the final result.","Keep the final message specific and user-readable."],["interaction.showModal","Responds to a command, button, or select by opening a modal form.","Only call it before another acknowledgement has been sent."],["interaction.isButton and related type guards","Narrow a generic Interaction into the specific interaction type.","Use type guards before reading type-specific fields."],["customId / setCustomId","Carries the routing key Discord sends back after a component click.","Treat it as a route hint, not proof of permission."],["PermissionFlagsBits","Provides named permission bits such as ManageGuild.","Check permissions inside the handler because visible buttons can be clicked later."],["parseCustomId / encodeCustomId","Turn component IDs into namespace, action, and state pieces.","Keep IDs short, stable, and under Discord custom ID limits."],["writeAuditLog","Records what happened for debugging, moderation, and incident review.","Log useful metadata, never tokens or private message content."]]}'
+  }
+/>
 
 ## 8. Common Mistakes
 

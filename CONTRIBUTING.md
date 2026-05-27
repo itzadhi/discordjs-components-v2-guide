@@ -20,4 +20,4 @@ npm run verify
 
 ## Credit
 
-This project is created for Adhi / @itzaqdhi. Keep credits in README, homepage, metadata, footer, about page, and branding assets.
+This project is made by @itzadhi. Keep credits in README, homepage, metadata, footer, about page, and branding assets.

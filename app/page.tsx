@@ -37,9 +37,7 @@ export default function HomePage() {
       <section className="mx-auto grid min-h-[calc(100vh-5rem)] w-full max-w-7xl items-center gap-10 px-5 py-12 md:grid-cols-[1.05fr_.95fr] lg:px-8">
         <div className="space-y-8">
           <div className="flex flex-wrap items-center gap-3">
-            <Badge variant="red">
-              Created by {site.credit.displayName} / @{site.credit.username}
-            </Badge>
+            <Badge variant="red">Made by @{site.credit.username}</Badge>
             <Badge variant="outline">{site.primary}</Badge>
             <Badge variant="outline">Modern Discord API only</Badge>
           </div>
@@ -75,14 +73,12 @@ export default function HomePage() {
               <div className="space-y-4">
                 <img
                   src={assetPath(site.logo)}
-                  alt="Adhi logo"
+                  alt="itzadhi logo"
                   className="aspect-square w-full rounded-2xl border border-red-300/20 object-cover shadow-2xl shadow-red-950/60"
                 />
                 <div className="rounded-2xl border border-red-400/20 bg-black/40 p-4">
                   <p className="text-sm font-bold text-red-100">GitHub profile card</p>
-                  <p className="mt-1 text-sm text-slate-300">
-                    {site.credit.displayName} builds modern Discord learning systems as @{site.credit.username}.
-                  </p>
+                  <p className="mt-1 text-sm text-slate-300">Made by @{site.credit.username}.</p>
                 </div>
               </div>
               <div className="space-y-4">

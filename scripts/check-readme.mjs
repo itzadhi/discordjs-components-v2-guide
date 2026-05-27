@@ -7,7 +7,7 @@ const html = new MarkdownIt({ html: true, linkify: true }).render(readme);
 if (!html.includes("<img")) {
   throw new Error("README did not render image tags.");
 }
-if (!html.includes("Adhi") || !html.includes("@itzaqdhi")) {
+if (!html.includes("Made by") || !html.includes("@itzadhi")) {
   throw new Error("README rendered output is missing required credits.");
 }
 

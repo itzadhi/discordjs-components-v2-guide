@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": false,
   "description": "Modern Discord.js v14+ Components V2 learning ecosystem with academy lessons, production architecture, references, and verified examples.",
-  "author": "Adhi (@itzaqdhi)",
+  "author": "itzadhi",
   "license": "MIT",
   "type": "module",
   "scripts": {

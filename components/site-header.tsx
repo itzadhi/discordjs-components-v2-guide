@@ -12,12 +12,12 @@ export function SiteHeader() {
         <Link href="/" className="flex min-w-0 items-center gap-3">
           <img
             src={assetPath(site.logo)}
-            alt="Adhi logo"
+            alt="itzadhi logo"
             className="h-11 w-11 rounded-xl border border-red-300/20 object-cover"
           />
           <div className="min-w-0">
             <p className="truncate text-sm font-black text-white sm:text-base">{site.name}</p>
-            <p className="truncate text-xs font-semibold text-red-200">Adhi / @{site.credit.username}</p>
+            <p className="truncate text-xs font-semibold text-red-200">Made by @{site.credit.username}</p>
           </div>
         </Link>
         <div className="hidden flex-1 justify-center lg:flex">

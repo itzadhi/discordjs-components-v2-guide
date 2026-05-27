@@ -1,0 +1,115 @@
+---
+title: "Function and API Reference: Discord.js v14+"
+description: "Detailed reference explaining what every major API, method, helper, and example function does."
+section: "Reference"
+order: 27
+tags: ["Discord.js v14+", "Reference", "functions", "modern-discord-api"]
+---
+
+<Callout title="Made by @itzadhi">
+  This page exists because beginners should not have to guess what a function does from code alone. Every name below
+  explains the purpose, when to use it, and the production habit that keeps it safe.
+</Callout>
+
+## 1. What Is It?
+
+This is the function and API dictionary for the guide. It explains the core library APIs, interaction methods, UI builders, lifecycle hooks, and example helper functions used across the docs.
+
+## 2. Why Does It Exist?
+
+Discord bot tutorials often show code before explaining the words inside the code. This page fixes that by turning each function into a small human explanation.
+
+## 3. How Discord Handles It Internally
+
+Discord receives command registrations through REST, sends realtime events through the Gateway, and sends interactions when users run commands, click components, choose menus, or submit modals. The functions below either build those payloads, receive those payloads, route them, or respond to them.
+
+## 4. Visual Explanation
+
+<MermaidDiagram
+  title="Function reference lifecycle"
+  chart={
+    'flowchart LR\n    A["Builder or decorator"] --> B["Discord API payload"]\n    B --> C["User action"]\n    C --> D["Interaction object"]\n    D --> E["Guard and service"]\n    E --> F["Reply, defer, modal, or followup"]'
+  }
+/>
+
+<ReferenceTable
+  data={
+    '{"headers":["API or function","What it does","Production habit"],"rows":[["Client","Creates the websocket client that connects to Discord Gateway events.","Instantiate once, configure intents intentionally, and attach listeners before login."],["GatewayIntentBits","Names the event groups your bot asks Discord to send.","Only enable what the feature needs, especially privileged intents."],["Events","Provides typed event names such as ClientReady and InteractionCreate.","Use constants to avoid typo-based event bugs."],["REST","Creates a REST client for command deployment and Discord HTTP calls.","Use it in deployment scripts, not repeatedly inside hot interaction paths."],["Routes","Builds Discord API endpoint paths such as application command routes.","Use guild routes while developing and global routes for production release."],["SlashCommandBuilder","Builds slash command JSON with names, descriptions, options, subcommands, and groups.","The result is registered with Discord and becomes visible in the client."],["ChatInputCommandInteraction","Represents a user running a slash command.","Read options from interaction.options and respond through interaction.reply or deferReply."],["ButtonInteraction","Represents a user clicking a Discord button.","Check interaction.customId, user, guild, and permissions before action."],["StringSelectMenuInteraction","Represents a select menu submission.","Use values for selected options and re-check current configuration."],["ModalSubmitInteraction","Represents submitted modal data.","Read fields, validate text, then write to storage or reject safely."],["ActionRowBuilder","Wraps buttons or menus into rows Discord can render.","Keep layout predictable and avoid unrelated controls in the same row."],["ButtonBuilder","Builds a button component.","Choose style based on action meaning and set a stable custom ID."],["StringSelectMenuBuilder","Builds a string select menu.","Use for menus whose options are known by your app."],["ModalBuilder","Builds a modal form.","Open it with showModal as the first interaction response."],["TextInputBuilder","Builds a modal text field.","Use labels and required flags to reduce bad submissions."],["PermissionFlagsBits","Names Discord permission bit flags.","Use it for command defaults and runtime guards."],["MessageFlags.IsComponentsV2","Marks messages that use Discord Components V2 layouts.","Use when sending V2 component-only layouts supported by the Discord API."]]}'
+  }
+/>
+
+## 5. Beginner Example
+
+Start by reading function names as plain English. A builder builds a Discord object. A reply replies to the interaction. A guard checks whether an action is allowed.
+
+<ReferenceTable
+  data={
+    '{"headers":["Method","What it does","When to use it"],"rows":[["interaction.reply()","Sends the initial interaction response.","Use for fast, final responses."],["interaction.deferReply()","Acknowledges an interaction and gives the bot more time.","Use before slow I/O, then finish with editReply."],["interaction.editReply()","Edits the deferred initial response.","Use after deferReply to show the final result."],["interaction.followUp()","Sends an additional response after acknowledgement.","Use sparingly so flows do not spam the user."],["interaction.showModal()","Opens a modal form as the interaction response.","Cannot be used after reply or defer."],["interaction.isChatInputCommand()","Checks whether the interaction is a slash command.","Use before reading commandName and options."],["interaction.isButton()","Checks whether the interaction is a button click.","Use before reading button-specific data."],["interaction.isStringSelectMenu()","Checks whether the interaction is a string select.","Use before reading values."],["interaction.isModalSubmit()","Checks whether the interaction is a modal submission.","Use before reading fields."],["interaction.inCachedGuild()","Checks whether guild and member data are cached.","Use before reading cached guild member permissions."],["options.getUser()","Reads a user option from a command.","Use required=true only when Discord should enforce it."],["options.getString()","Reads a string option from a command.","Validate length and business rules after reading."],["fields.getTextInputValue()","Reads a modal text field value.","Validate and sanitize before storage or display."],["builder.toJSON()","Converts builders into Discord API JSON.","Use in deployment scripts when registering commands."]]}'
+  }
+/>
+
+## 6. Intermediate Example
+
+Intermediate projects stop putting every decision inside the event callback. They route the interaction, parse state, validate permission, then call a small service function.
+
+<ReferenceTable
+  data={
+    '{"headers":["Helper","What it does","Production note"],"rows":[["encodeCustomId()","Creates a compact custom ID from namespace, action, and entity ID.","Keep IDs stable and short."],["parseCustomId()","Splits a component custom ID into routing pieces.","Never treat it as authorization."],["handleInteraction()","Central router for commands, buttons, selects, and modals.","Keep it thin and dispatch to feature modules."],["createModerationCase()","Creates a moderation case and audit metadata.","Store cases in a database in production."],["handleTicketComponent()","Routes ticket buttons and modal submissions.","Check staff/user ownership before closing or editing tickets."],["getWalletSummary()","Reads economy balance and cooldown state.","Use database transactions for real currency systems."],["addCoins()","Updates a balance.","Use idempotency and anti-abuse checks in production."],["handleMusicComponent()","Routes music control button clicks.","Verify voice channel and queue ownership."],["buildDashboardConfirmation()","Creates dashboard OAuth confirmation state.","Sign or store state server-side."],["buildAssistantRequest()","Prepares an AI assistant request.","Trim context and avoid logging private content."],["writeAuditLog()","Writes structured audit events.","Log action metadata, not secrets."],["isGuildManager()","Checks ManageGuild permission.","Use as one guard, not the only authorization layer."]]}'
+  }
+/>
+
+## 7. Production Example
+
+Production bots treat every function as part of a workflow:
+
+1. Builder or decorator defines what Discord shows.
+2. Interaction object tells the bot what the user did.
+3. Type guard or callback confirms what kind of interaction arrived.
+4. Permission guard checks whether this user can act.
+5. Service function performs the business operation.
+6. Response method tells the user what happened.
+7. Audit helper records the decision for maintainers.
+
+### Function-by-function walkthrough
+
+<ReferenceTable
+  data={
+    '{"headers":["Layer","Function family","What it protects"],"rows":[["Discord API","builders, decorators, command sync, component IDs","The contract between the bot and Discord"],["Runtime","interaction methods, callbacks, type guards, event handlers","Correct response timing and routing"],["Production","services, audit logs, config loaders, database helpers","Scale, safety, observability, and maintainability"]]}'
+  }
+/>
+
+## 8. Common Mistakes
+
+<OutdatedWarning
+  oldWay="Copying snippets without understanding what each function does."
+  why="A bot can appear to work locally while hiding timing bugs, permission gaps, blocking calls, or deprecated patterns."
+  modern="Use discord.js v14 builders, typed interactions, command deployment scripts, and service-layer helpers. Avoid v12/v13 snippets and prefix-first architectures as defaults."
+/>
+
+- Calling a response method twice on the same interaction.
+- Reading component state without checking the current user and guild.
+- Doing slow work before defer or acknowledgement.
+- Treating a helper function as magic instead of reading its input and output.
+
+## 9. Best Practices
+
+- Learn the function purpose before copying the snippet.
+- Keep callbacks short and name service functions after the real action.
+- Check current permissions every time a component is clicked.
+- Log actions with enough metadata to debug, without storing secrets.
+- Prefer explicit helpers over giant files full of unrelated interaction code.
+
+## 10. Performance Notes
+
+Fast functions can reply directly. Slow functions should defer first, then use a service and final response. Database, HTTP, AI, file, and voice operations should not block the interaction handler.
+
+## 11. Security Notes
+
+Custom IDs, option strings, modal fields, and select values are inputs. Validate them like form data. Never let a function perform moderation, economy, ticket, or dashboard actions without a permission and ownership check.
+
+## 12. Challenge Section
+
+1. Pick five functions from this page and explain them without using code.
+2. Find one example module and label every function as builder, router, guard, service, or response.
+3. Add one missing guard to an example callback.
+4. Write a small service function and document its input, output, and failure cases.
